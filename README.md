@@ -7,7 +7,7 @@ appsettings.Development.json
 
 General structure is as follows:
 
-{
+```{
   "ConnectionStrings": {
     "DefaultConnection": "Server=SERVER\\SQLEXPRESS;Database=sample_app;Trusted_Connection=True;TrustServerCertificate=True"
   },
@@ -49,10 +49,12 @@ General structure is as follows:
     }
   }
 }
-
+```
 
 privkey.pem
 fullchain.pem
 
 - In WSL instance to make Dev Certs
+  ```
   openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out fullchain.pem -days 365 -nodes -subj "/CN=localhost"
+  ```
