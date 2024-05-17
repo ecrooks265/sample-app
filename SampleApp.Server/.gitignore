@@ -1,0 +1,4 @@
+appsettings.json
+appsettings.Development.json
+privkey.pem
+fullchain.pem

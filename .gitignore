@@ -1,0 +1,68 @@
+# Ignore Visual Studio temporary files, build results, and
+# build logs.
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# .NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET Core
+project.json
+project.json.lock
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono)
+mono_crash.*
+
+# Auto-generated files
+Generated/
+
+# Uncomment if you have tasks that create the file containing
+# XML documentation comments.
+# *.doc.xml
+
+# Rider
+.idea/
+*.sln.iml
+
+# Avoid files that might contain user secrets, or credentials.
+*.swp
+*.swo
+*.pdb
+
+# VS Code
+.vscode/
+
+# Mac
+*.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Custom Directory and files for VS
+.vs/
+
+# Exclude hidden directories/files at the root level.
+.*.swp
+*.log
+*.vs/
+*.pem
