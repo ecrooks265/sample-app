@@ -1,0 +1,52 @@
+
+.flexbox{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-gray);
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+}
+.title{
+
+}
+.card{
+ position: relative;
+ width: fit-content;
+ padding: 10px;
+ border-radius: 2.5px;
+ margin: 10px;
+}
+table {
+  border: 2px solid var(--main-dark-gray);
+  padding: 5px;
+  background-color: white;
+
+  tr {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 2px solid var(--main-dark-gray);
+  }
+
+  thead {
+    font-weight: bolder;
+    font-size: 14pt;
+    margin: 10px;
+  }
+
+  th {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 2px solid var(--main-dark-gray);
+    border-right: 2px solid var(--main-dark-gray);
+  }
+
+  td {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-left: 2px solid var(--main-dark-gray);
+    border-right: 2px solid var(--main-dark-gray);
+  }
+}

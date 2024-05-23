@@ -1,0 +1,84 @@
+<div id="ctn">
+  <h1 class="title">Engineer Salary Data</h1>
+  <div class="flexbox">
+    <!-- Top Paid Data Engineer Salaries -->
+    <div class="card">
+      <h2>Top Paid Data Engineer Salaries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Experience Level</th>
+            <th>Salary (USD)</th>
+            <th>Company Location</th>
+            <th>Employee Residence</th>
+            <th>Company Size</th>
+            <th>Remote Ratio</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for( salary of topSalaries; track salary.salary_in_usd){
+            <tr>
+                <td>{{ salary.job_title }}</td>
+                <td>{{ salary.experience_level}}</td>
+                <td>{{ salary.salary_in_usd }}</td>
+                <td>{{ salary.company_location }}</td>
+                <td>{{ salary.employee_residence }}</td>
+                <td>{{ salary.company_size }}</td>
+                <td>{{ salary.remote_ratio }}</td>
+                
+            </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Find Salaries by Job Title -->
+    <div class="card">
+      <h2>Find Salaries by Job Title</h2>
+      <div class="">
+        <label for="jobTitle">Job Title:</label>
+        <select id="jobTitle" [(ngModel)]="selectedTitle" (change)="onTitleChange()">
+          @for (title of jobTitles; track title) {
+            <option [value]="title">{{ title }}</option>
+          }
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Experience Level</th>
+            <th>Salary (USD)</th>
+            <th>Company Location</th>
+            <th>Employee Residence</th>
+            <th>Company Size</th>
+            <th>Remote Ratio</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for( salary of salariesByTitle; track salary.salary_in_usd){
+            <tr>
+                <td>{{ salary.job_title }}</td>
+                <td>{{ salary.experience_level}}</td>
+                <td>{{ salary.salary_in_usd }}</td>
+                <td>{{ salary.company_location }}</td>
+                <td>{{ salary.employee_residence }}</td>
+                <td>{{ salary.company_size }}</td>
+                <td>{{ salary.remote_ratio }}</td>
+                
+            </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Navigation to Add Data Engineer Salary -->
+    <div class="card">
+      <h2>Manage Salaries</h2>
+      <ul>
+        <li><a routerLink="/data/add-data-engineer-salary">Add a Row</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

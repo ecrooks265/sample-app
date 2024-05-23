@@ -1,0 +1,212 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$sampleapp: mat.define-palette(mat.$indigo-palette);
+$sampleapp: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$sampleapp: mat.define-palette(mat.$red-palette);
+
+/* You can add global styles to this file, and also import other style files */
+/* CSS Reset - http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126  License: none (public domain) */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* CSS Reset end */
+
+/* ----- Document Style ---- */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  align-items: center;
+}
+
+h1{
+  font-size: 16pt;
+}
+
+/* ----- Colors ----- */
+:root {
+
+  --main-gray: lightgray;
+  --main-dark-gray: darkgray;
+  --save-green: rgb(70, 191, 18);
+  --delete-red: rgb(155, 2, 2);
+  --link-blue: rgb(5, 113, 204);
+}
+
+/* ---- Security ---- */
+.sec-page-ctn {
+  display: flex;
+  width: 300px;
+  padding: 20px;
+  background: var(--main-gray);
+  border-radius: 2.5px;
+  border: 2px solid var(--main-dark-gray);
+  
+}
+
+.invalid-field {
+  border: 2px solid var(--delete-red);
+}
+
+.sec-page-btn {
+  margin: 10px;
+  padding: 12.5px;
+  width: fit-content;
+  background-color: var(--delete-red);
+  border-radius: 2.5px;
+  color: white;
+  float: right;
+}
+
+.register-ctn {
+  margin: 2px auto 0;
+}
+
+.form-error-ctn {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form-errors {
+  width: 100%;
+  font-size: 10pt;
+  color: var(--delete-red);
+  margin: 0 0 3px 13px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.pwd-match-error {
+  font-size: 12pt;
+  margin: 0 0 6px 0;
+  align-items: center;
+}
+
+.sub-error {
+  margin-left: 15px;
+}
+
+.sec-page-link-btn{
+    color: var(--link-blue);
+    text-decoration: none;
+}
+
+.form-control{
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* ---- Data Engineer Salary ---- */
+.page-form {
+  justify-content: end;
+  width: 380px;
+  height: fit-content;
+  padding: 20px;
+  background: var(--main-gray);
+  border-radius: 2.5px;
+  border: 2px solid var(--main-dark-gray);
+  
+}
+
+.form-group {
+  
+  display: flex;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.form-page-btn {
+  margin: 10px;
+  padding: 12.5px;
+  width: fit-content;
+  background-color: var(--delete-red);
+  border-radius: 2.5px;
+  color: white;
+}
+/* ---- Angular Material Styles ---- */
+
+/* snack bar */
+.snackbar {
+  max-width: 250px;
+  margin: 0 auto !important;
+  display: inline-block;
+  text-align: center;
+}
+/* loading */
+.loading {
+  background-color: transparent !important;
+  box-shadow: none;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family:monospace; font-size: 12pt; font-weight: 700; }
+/* ---- content classes ---- */
+
+#ctn {
+  text-align: center;
+  background-color: var(--main-gray);
+  padding: 10px;
+
+}
+
+a{
+  text-decoration: none;
+  color: var(--link-blue);
+  cursor: pointer;
+}

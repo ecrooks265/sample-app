@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SampleApp.Server.Models.Entities;
 using SampleApp.Models.Entities.Identity;
 using SampleApp.Server.Models.Entities.Identity;
+using SampleApp.Models.Entities;
 
 namespace SampleApp.Models.Contexts
 {
     public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
-
-        #region Boilerplate
         public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
@@ -24,36 +22,27 @@ namespace SampleApp.Models.Contexts
             var connstring = config["ConnectionStrings:DefaultConnection"];
             optionsBuilder.UseSqlServer(connstring);
         }
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-        #endregion
 
-        #region DbSets
-      
         public virtual DbSet<DataEngineerSalary> DataEngineerSalaries { get; set; }
-        
-      
-        #endregion
 
-        #region TableDefinitons
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ApplicationUser>(entity => {
-                //add any custom properties (foreign keys, etc.) here
+                // add any custom properties (foreign keys, etc.) here
             });
 
             modelBuilder.Entity<DataEngineerSalary>(entity =>
             {
-                 entity.Property(p => p.Id)
+                entity.ToTable("DataEngineerSalaries", "dbo");
+                entity.Property(p => p.Id)
                 .ValueGeneratedOnAdd(); // Configure Id as auto-generated
             });
 
             SeedData(modelBuilder);
 
-            // Put at bottom of this method
             base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
-        #endregion
 
         private void SeedData(ModelBuilder modelBuilder)
         {
@@ -66,5 +55,7 @@ namespace SampleApp.Models.Contexts
                 modelBuilder.Entity<DataEngineerSalary>().HasData(salary);
             }
         }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

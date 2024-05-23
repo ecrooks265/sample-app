@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.IO;
 using CsvHelper;
-using SampleApp.Server.Models.Entities;
+using SampleApp.Models.Entities;
     //used in applicationdb context to seed database
     public class CsvDataLoader
     {

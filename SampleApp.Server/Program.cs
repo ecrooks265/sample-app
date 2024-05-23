@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SampleApp.Models.Contexts;
 using SampleApp.Models.Entities.Identity;
 using SampleApp.Server.Models.Entities.Identity;
-using SampleApp.Server.Services.Middleware;
+using SampleApp.Services.Middleware;
 using SampleApp.Services.Account;
 using SampleApp.Server.Services.Middleware.CustomIdentityAPI;
-using SampleApp.Server.Models.Entities;
 using SendGrid;
+using SampleApp.Services;
+using Microsoft.Extensions.Logging;
 
 namespace SampleApp
 {
@@ -17,6 +18,12 @@ namespace SampleApp
         {
             var builder = WebApplication.CreateBuilder(args);
             var _config = builder.Configuration;
+
+            #region Logging Configuration
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+            #endregion
 
             #region Database Services
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection not found.");
@@ -32,9 +39,7 @@ namespace SampleApp
                 c.DefaultAuthenticateScheme = IdentityConstants.BearerScheme;
                 c.DefaultChallengeScheme = IdentityConstants.BearerScheme;
             })
-           
-            .AddBearerToken(IdentityConstants.BearerScheme)
-            ;
+            .AddBearerToken(IdentityConstants.BearerScheme);
 
             builder.Services.AddAuthorizationBuilder()
                 .AddPolicy("api", p => {
@@ -45,7 +50,7 @@ namespace SampleApp
             builder.Services.AddIdentityCore<ApplicationUser>(o => {
                 o.SignIn.RequireConfirmedEmail = true;
                 o.User.RequireUniqueEmail = true;
-                o.Password.RequiredLength = 12;
+                o.Password.RequiredLength = 10;
                 o.Password.RequiredUniqueChars = 8;
                 o.Password.RequireLowercase = true;
                 o.Password.RequireUppercase = true;
@@ -55,8 +60,7 @@ namespace SampleApp
             })
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddApiEndpoints()
-            ;
+            .AddApiEndpoints();
             #endregion
 
             #region Standard Services
@@ -69,18 +73,21 @@ namespace SampleApp
             builder.Services.AddTransient<Ganss.Xss.IHtmlSanitizer, Ganss.Xss.HtmlSanitizer>(
                              (_) => { return new Ganss.Xss.HtmlSanitizer(); });
             builder.Services.AddTransient<ILiquidTemplateProvider, LiquidTemplateProvider>();
-            // Add SendGridEmailService
+            builder.Services.AddTransient<IDataEngineerSalaryService, DataEngineerSalaryService>();
+
             builder.Services.AddTransient<ISendGridEmailService<ApplicationUser>, SendGridEmailService<ApplicationUser>>(provider =>
             {
                 var apiKey = _config["SENDGRID_API_KEY"];
                 return new SendGridEmailService<ApplicationUser>(apiKey);
             });
+
             #region Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c => {
                 c.EnableAnnotations();
             });
             #endregion
+
             #region Cors
             builder.Services.AddCors(o => {
                 o.AddPolicy(name: "Default",
@@ -90,17 +97,14 @@ namespace SampleApp
                         .AllowAnyHeader();
                     });
             });
-
             #endregion
 
             #endregion
-          
+
             var app = builder.Build();
 
             #region Configure App
-            // Configure the HTTP request pipeline.
             app.UseMigrationsEndPoint();
-            
 
             #region Swagger
             app.UseSwagger();
@@ -114,7 +118,6 @@ namespace SampleApp
             app.UseCors("Default");
 
             #region AAA
-            // AAA always after UseRouting()
             app.UseAuthentication();
             app.UseAuthorization();
             #endregion
@@ -130,6 +133,11 @@ namespace SampleApp
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             #endregion
             app.Run();

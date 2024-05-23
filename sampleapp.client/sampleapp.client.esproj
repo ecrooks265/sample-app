@@ -8,12 +8,11 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\sampleapp.client\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\app\core\guards\" />
-    <Folder Include="src\app\core\interfaces\" />
-    <Folder Include="src\app\core\interceptors\" />
-    <Folder Include="src\app\core\services\" />
-    <Folder Include="src\app\feature\security\" />
-    <Folder Include="src\app\library\" />
-    <Folder Include="src\app\shared\" />
+    <Folder Include="src\app\core\interfaces\engineer-salary\" />
+    <Folder Include="src\app\core\interfaces\security\" />
+    <Folder Include="src\app\core\services\angular-material\" />
+    <Folder Include="src\app\feature\account\security\" />
+    <Folder Include="src\app\library\validators\" />
+    <Folder Include="src\app\shared\angular-material\" />
   </ItemGroup>
 </Project>

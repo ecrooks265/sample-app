@@ -71,15 +71,6 @@ public static class IdentityApiEndpointRouteBuilderExtensions
                     requestingUrl = refererUrl.ToString();
                 }
 
-                //var requestingUrl = context.Request.Headers["origin"].ToString();
-                //if( requestingUrl.ToLower().Contains("adsketchpro.com") ||
-                //    requestingUrl.ToLower().Contains("crepsunited.com") ||
-                //    requestingUrl.ToLower().Contains("hitech.com") ){
-
-                //} else {
-                //    return CreateValidationProblem( IdentityResult() )
-                //}
-
                 if (!userManager.SupportsUserEmail)
                 {
                     throw new NotSupportedException($"{nameof(CustomMapIdentityApi)} requires a user store with email support.");

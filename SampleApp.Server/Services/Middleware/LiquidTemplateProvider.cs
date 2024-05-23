@@ -1,6 +1,6 @@
 ﻿using DotLiquid;
 
-namespace SampleApp.Server.Services.Middleware
+namespace SampleApp.Services.Middleware
 {
     public interface ILiquidTemplateProvider
     {

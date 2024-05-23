@@ -22,7 +22,7 @@ namespace SampleApp.Services.Account
 
         public async Task SendConfirmationEmailAsync(TUser user, string email, string confirmationCode, string requestingUrl)
         {
-            var from = new EmailAddress("email@email.com", "Name");
+            var from = new EmailAddress("", "Name"); //replace email with email from sendgrid
             var to = new EmailAddress(email);
             var subject = "Confirm your email address";
             var plainTextContent = $"Please confirm your email address by clicking the link: {HtmlEncoder.Default.Encode(requestingUrl)}";
@@ -33,7 +33,7 @@ namespace SampleApp.Services.Account
 
         public async Task SendPasswordResetEmailAsync(TUser user, string email, string resetCode, string requestingUrl)
         {
-            var from = new EmailAddress("email@email.com", "Name");
+            var from = new EmailAddress("", "Name"); //replace email with email from sendgrid
             var to = new EmailAddress(email);
             var subject = "Reset your password";
             var plainTextContent = $"Please reset your password by clicking the link: {HtmlEncoder.Default.Encode(requestingUrl)}";
@@ -44,7 +44,7 @@ namespace SampleApp.Services.Account
 
         public async Task ResendConfirmationEmailAsync(TUser user, string email, string requestingUrl)
         {
-            var from = new EmailAddress("email@email.com", "Name");
+            var from = new EmailAddress("", "Name"); //replace email with email from sendgrid
             var to = new EmailAddress(email);
             var subject = "Confirm your email address";
             var plainTextContent = $"Please confirm your email address by clicking the link: {HtmlEncoder.Default.Encode(requestingUrl)}";

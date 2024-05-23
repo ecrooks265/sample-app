@@ -2,7 +2,7 @@ export const environment = {
   production: false,
 
   //base URL
-  baseUrl: 'https://localhost',
+  baseUrl: 'https://localhost:443',
   //Account & Security
   loginUrl: "/api/account/login",
   registerUrl: "/api/account/register",
@@ -11,5 +11,15 @@ export const environment = {
   resetPwdUrl: "/api/account/resetPassword",
   manageAccUrl: "/api/account/manage/info",
   confirmEmailUrl: "/api/account/confirmEmail",
-  resendConfirmationEmailUrl: "/api/account/resendConfirmationEmail"
+  resendConfirmationEmailUrl: "/api/account/resendConfirmationEmail",
+  // Engineer Salary
+  dataUrl: '/api/DataEngineerSalary',
+  getTitles: '/uniqueJobTitles',
+  getByRemote: '/remote',
+  getById: '/by-id',
+  topPaid: '/top',
+  getByTitle: '/title',
+  //variables for reference
+  authKey: "Auth" // localstorage variable keyname. stores auth object as "Auth" in local storage
+
 };

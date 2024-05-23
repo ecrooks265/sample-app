@@ -1,0 +1,30 @@
+<h1 class="sec-page-title">Account Sign In</h1>
+<div class="sec-page-ctn">
+    <form class="sec-page-form" [formGroup]="loginForm">
+      <input class="form-control" required
+             formControlName="email"
+             [ngClass]="{'invalid-field' : loginForm.controls['email'].invalid && (loginForm.controls['email'].touched || formSubmitted)}"
+             autofocus="autofocus" placeholder="Email" />
+
+      <input class="form-control" required
+             formControlName="password"
+             [ngClass]="{'invalid-field' : loginForm.controls['password'].invalid && (loginForm.controls['password'].touched || formSubmitted)}"
+             type="password" placeholder="Password" />
+
+      <div class="sec-page-btn-ctn">
+        <a class="sec-page-help-btn psw-reset" routerLink="/account/forgot">Forgot Password?</a>
+      </div>
+      @if (loginFailed) {
+      <div class="fail-msg">{{failedReason}}</div>
+      }
+      <div class="sec-page-btn" (click)="login()">
+        Sign In
+      </div>
+
+      <div class="register-ctn">
+        No Account?
+        <a class="sec-page-link-btn register-ctn" routerLink="/account/register">Register</a>
+      </div>
+
+    </form>
+</div>

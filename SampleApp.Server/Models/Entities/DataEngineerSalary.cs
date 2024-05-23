@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Server.Models.Entities
+﻿namespace SampleApp.Models.Entities
 {
     public class DataEngineerSalary
     {

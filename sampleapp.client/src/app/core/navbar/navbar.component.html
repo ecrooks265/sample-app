@@ -1,0 +1,10 @@
+<nav>
+    <div class="navbar-left">
+      <a routerLink="/">Sample App</a>
+    </div>
+    <div class="navbar-right">
+      <a [ngClass]="{'visible': securityObject.isAuthenticated, 'invisible': !securityObject.isAuthenticated}" routerLink="/account">Account</a>
+      <a [ngClass]="{'visible': !securityObject.isAuthenticated, 'invisible': securityObject.isAuthenticated}" routerLink="/account/login">Login</a>
+    </div>
+  </nav>
+  

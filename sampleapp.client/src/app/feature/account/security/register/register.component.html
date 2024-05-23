@@ -1,0 +1,40 @@
+<h1 class="sec-page-title">Account Registration</h1>
+<div class="sec-page-ctn">
+
+    <form class="sec-page-form" [formGroup]="registerForm" (keyup.enter)="register()">
+      <input class="form-control"
+             formControlName="email"
+             [ngClass]="{'invalid-field' : registerForm.controls['email'].invalid && (registerForm.controls['email'].touched || formSubmitted)}"
+             autofocus="autofocus" placeholder="Email" />
+
+      <input class="form-control"
+             formControlName="password"
+             [ngClass]="{'invalid-field' : registerForm.controls['password'].invalid && (registerForm.controls['password'].touched || formSubmitted)}"
+             type="password" placeholder="Password" />
+
+      <input class="form-control"
+             formControlName="confirmpassword"
+             [ngClass]="{
+                  'invalid-field' : registerForm.controls['confirmpassword'].invalid && (registerForm.controls['confirmpassword'].touched || formSubmitted)
+                }"
+             type="password" placeholder="Confirm Password" />
+      @if (registerForm.errors && (registerForm.controls['password'].dirty || formSubmitted)) {
+      <div class="form-error-ctn">
+        @for (errorMsg of errorMsgs; track errorMsg) {
+          <ng-container>
+            <span class="form-errors">{{ errorMsg }}</span>
+          </ng-container>
+        }
+      </div>
+      }
+      <div>
+        Already have an account? <a class="sec-page-link-btn" routerLink="/account/login">Login</a>
+      </div>
+      
+      <div class="sec-page-btn" (click)="register()">
+        Register
+      </div>
+
+      
+    </form>
+</div>

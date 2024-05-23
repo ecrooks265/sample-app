@@ -1,0 +1,61 @@
+<h1>Add Data Engineer Salary</h1>
+<form class="page-form" [formGroup]="salaryForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="jobTitle">Job Title:</label>
+    <input id="jobTitle" formControlName="job_title" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label for="experienceLevel">Experience Level (Senior, Middle, Entry, Executive):</label>
+    <select id="experienceLevel" formControlName="experience_level" class="form-control" required>
+        <option value="EN">EN</option>
+        <option value="MI">MI</option>
+        <option value="SE">SE</option>
+        <option value="EX">EX</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="employmentType">Employment Type (Full-Time, Part-Time, Contracted):</label>
+    <select id="employmentType" formControlName="employment_type" class="form-control" required>
+        <option value="FT">FT</option>
+        <option value="PT">PT</option>
+        <option value="CT">CT</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="salaryInUsd">Salary (USD):</label>
+    <input id="salaryInUsd" formControlName="salary_in_usd" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label for="employeeResidence">Employee Residence:</label>
+    <input id="employeeResidence" formControlName="employee_residence" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label for="companyLocation">Company Location:</label>
+    <input id="companyLocation" formControlName="company_location" class="form-control" required />
+  </div>
+
+  <div class="form-group">
+    <label for="companySize">Company Size ( Small(0-50) Medium(50-200) Large(200+) ):</label>
+    <select id="companySize" formControlName="company_size" class="form-control" required>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="remoteRatio">Remote Ratio (%):</label>
+    <select id="remoteRatio" formControlName="remote_ratio" class="form-control" required>
+        <option value="0">0</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+  </div>
+
+  <button type="submit" class="sec-page-btn" [disabled]="salaryForm.invalid">Add Salary</button>
+</form>
