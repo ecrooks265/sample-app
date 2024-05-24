@@ -63,6 +63,15 @@ export class SecurityService implements OnInit{
     return this._http.post<object>(env.baseUrl + env.resetPwdUrl, resetForm);
   }
 
+  confirmEmail( userId: string, code: string ) {
+    return this._http.get( env.baseUrl + env.confirmEmailUrl + "?userId=" + userId + "&code=" + code, { responseType: 'text' } );
+  }
+  
+  //resend confirm email
+  resendConfirmEmail( email: object ){
+    return this._http.post<object>( env.baseUrl + env.resendConfirmationEmailUrl, email);
+  }
+
   refreshToken() {
     let refreshObject = {
       refreshToken: this.securityObject.refreshToken
@@ -99,7 +108,6 @@ export class SecurityService implements OnInit{
       this.securityObject.isAuthenticated = parsedAuth.isAuthenticated;
       this.securityObject.userName = parsedAuth.userName;
     }
-    console.log(this.securityObject + " : ")
   }
   setExpiration(expiresIn: number): Date {
     //expiration used by refresh token to determine when to request new token set
