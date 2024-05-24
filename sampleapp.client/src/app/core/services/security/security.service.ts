@@ -108,32 +108,6 @@ export class SecurityService implements OnInit{
 
     return date;
   }
-
-  securityCheck() {
-    if (localStorage.getItem(this.authKey)) {
-      //see if user is authenticated before assigning to securityObject
-      let tempSecObj = JSON.parse(localStorage.getItem(this.authKey) ?? '') as UserAuthBase; 
-      
-      this.securityObject.refreshToken = tempSecObj.refreshToken;
-      this.securityObject.userName = tempSecObj.userName;
-      //call for refresh - successful refresh will set rest of securityObject properties, otherwise logout
-      this.refreshToken().pipe(first()).subscribe({
-        next: (resp: LoginResp) => {
-          this.securityObject.accessToken = resp.accessToken;
-          this.securityObject.isAuthenticated = true;
-          this.securityObject.expiration = this.setExpiration(resp.expiresIn);
-        },
-        error: (e) => {
-          this.logout(),
-            this._router.navigate([""]);
-        },
-        complete: () => {
-          this.storeAuth();
-          this._router.navigate([""]);
-        }
-      })
-    };
-  }
   // used by auth interceptor
   addAuth( request: HttpRequest<any> ): HttpRequest<any> {
     return request.clone({
