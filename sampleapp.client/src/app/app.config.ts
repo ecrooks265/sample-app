@@ -6,7 +6,6 @@ import { routes } from "./app.routes";
 import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from "src/environments/environment.development";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { LoadingInterceptor } from "./core/interceptors/loading.interceptor";
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 
 
