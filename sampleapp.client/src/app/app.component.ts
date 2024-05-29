@@ -4,14 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './core/home/home.component';
-import { LoadingComponent } from './shared/loading/loading.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { FooterComponent } from './core/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, HomeComponent, LoadingComponent, NavbarComponent, FooterComponent],
+  imports: [CommonModule, RouterModule, FormsModule, HomeComponent, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
