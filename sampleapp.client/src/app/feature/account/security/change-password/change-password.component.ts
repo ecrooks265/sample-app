@@ -2,15 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { AppUserAuth } from 'src/app/core/interfaces/security/app-user-auth';
 import { SnackbarService } from 'src/app/core/services/angular-material/snackbar.service';
 import { SecurityService } from 'src/app/core/services/security/security.service';
 
-
 @Component({
-  selector: 'app-change-password',
+  selector: 'app-reset-password',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,49 +25,46 @@ export class ChangePasswordComponent implements OnInit {
   resetForm!: FormGroup;
   formSubmitted = false;
 
+  code!: string;
+  email!: string;
+
   constructor(
+    private _route: ActivatedRoute,
     private _securityService: SecurityService,
-    private _formBuilder: FormBuilder,
+    private _fb: FormBuilder,
     private _router: Router,
     private _snackService: SnackbarService
-  ){
-    this.resetForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
+  ){}
 
   ngOnInit(): void {
-    //get security object
-    this.securityObject = this._securityService.securityObject;
+		this.code = this._route.snapshot.queryParamMap.get("code") ?? "";
+		this.email = this._route.snapshot.queryParamMap.get("email") ?? "";
 
-    if (this.securityObject.resetInProgress) {
-      this.resetForm = this._formBuilder.group({
-        resetCode: ['', Validators.required],
+		if( !this.email || !this.code ){
+			this._router.navigate(["account/login"]);
+		} else {
+			this.resetForm = this._fb.group({
         newPassword: ['', Validators.required]
       });
-    } else {
-      this._router.navigate(["account/login"]);
-    }
+		}
   }
 
   resetPassword() {
     this.formSubmitted = true;
 
     if (this.resetForm.invalid) {
-      //notifiy user
-      this._snackService.openSnackBar("Form incomplete. Please fix highlighted fields.");
+      //notifiy user of error
+      this._snackService.openSnackBar("Form incomplete. Please fix to meet password requirements.");
     } else {
-      //create json object to send to api
-      let newPwdObj = {
-        email: this.securityObject.userName,
-        resetCode: this.resetForm.controls['resetCode'].value,
+      const newPassword = {
+        email: this.email,
+        resetCode: this.code,
         newPassword: this.resetForm.controls['newPassword'].value
       }
-      
-      this._securityService.resetPwd(newPwdObj).pipe(first()).subscribe({
-        next: (resp) => {
-          this._snackService.openSnackBar("Password Reset");
+
+      this._securityService.resetPwd(newPassword).pipe(first()).subscribe({
+        next: () => {
+          this._snackService.openSnackBar("Successfully reset password");
           this.securityObject.init();
         },
         error: (e) => console.error(e),
@@ -76,5 +72,4 @@ export class ChangePasswordComponent implements OnInit {
       })
     }
   }
-
 }
