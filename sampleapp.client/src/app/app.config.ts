@@ -25,7 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([
      AuthInterceptor
     ])),
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: APP_ID, useValue: 'ng-cli-universal' },
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
     provideServiceWorker('ngsw-worker.js', {
