@@ -58,3 +58,5 @@ fullchain.pem
   ```
   openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out fullchain.pem -days 365 -nodes -subj "/CN=localhost"
   ```
+
+Subsequently update your .net email services with an actual SMTP email endpoint or implement sendGrid instead.
