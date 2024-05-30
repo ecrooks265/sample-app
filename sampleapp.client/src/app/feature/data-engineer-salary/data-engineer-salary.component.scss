@@ -1,52 +1,79 @@
-
-.flexbox{
+/* ---- Data Engineer Salary Component Styles ---- */
+.flexbox {
   display: flex;
-  flex-direction: column;
   background-color: var(--main-gray);
-  flex-wrap: wrap;
   position: relative;
   justify-content: center;
-  align-items: center;
-
+  width: 85vw;
+  min-height: 90vh;
 }
-#job-title{
+
+#job-title {
   margin: 10px;
 }
-.card{
-position: relative;
-width: fit-content;
-padding: 10px;
-border-radius: 2.5px;
-margin: 10px;
+
+.card {
+  position: relative;
+  margin: 2.5px;
+  border-radius: 2.5px;
+  max-height: 90vh;
+  width: 90%;
+
+
 }
+
 table {
-border: 2px solid var(--main-dark-gray);
-padding: 5px;
-background-color: white;
+  border: 2px solid var(--main-dark-gray);
+  padding: 5px;
+  background-color: white;
+  width: 100%;
+}
 
 tr {
-  padding-left: 5px;
-  padding-right: 5px;
   border: 2px solid var(--main-dark-gray);
 }
 
 thead {
   font-weight: bolder;
   font-size: 14pt;
-  margin: 10px;
 }
 
-th {
-  padding-left: 5px;
-  padding-right: 5px;
+th, td {
+  padding: 3px 5px;
   border-left: 2px solid var(--main-dark-gray);
   border-right: 2px solid var(--main-dark-gray);
 }
 
-td {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  border-left: 2px solid var(--main-dark-gray);
-  border-right: 2px solid var(--main-dark-gray);
+li{
+  padding: 5px;
+  margin: 1px;
+  border-bottom: 2px solid var(--main-dark-gray);
 }
+
+hr{
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.mat-drawer-btn {
+  position: fixed;
+  z-index: 3;
+  padding: 10px;
+  font-weight: bold;
+  right: 25px;
+  top: 100px;
+}
+
+.mat-drawer-btn h6 {
+  padding: 0px;
+  margin: 0px;
+  font-size: 10pt;
+  transform: rotate(90deg);
+}
+
+mat-drawer {
+  margin: 2px;
+  border-radius: 5px;
+  border: 3px solid var(--main-dark-gray);
+  padding: 20px;
+  background-color: var(--main-gray);
 }

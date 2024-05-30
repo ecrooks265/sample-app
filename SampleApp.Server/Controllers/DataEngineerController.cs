@@ -64,5 +64,13 @@ namespace SampleApp.Server.Controllers
             var result = await _service.AddDataEngineerSalaryAsync(salary);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
+
+        [HttpGet("year")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<string>>> GetByYear(string year)
+        {
+            var result = await _service.GetByYearAsync(year);
+            return Ok(result);
+        }
     }
 }

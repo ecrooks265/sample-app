@@ -11,6 +11,8 @@ namespace SampleApp.Services
         Task<IEnumerable<DataEngineerSalary>> GetByTitleAsync(string title);
         Task<IEnumerable<string>> GetUniqueJobTitlesAsync();
         Task<DataEngineerSalary> AddDataEngineerSalaryAsync(DataEngineerSalary salary);
+        Task<DataEngineerSalary> GetByYearAsync(string year);
+
     }
     public class DataEngineerSalaryService : IDataEngineerSalaryService
     {
@@ -148,6 +150,27 @@ namespace SampleApp.Services
                             jobTitles.Add(reader.GetString(reader.GetOrdinal("job_title")));
                         }
                         return jobTitles;
+                    }
+                }
+            }
+        }
+
+        public async Task<DataEngineerSalary> GetByYearAsync(string year)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM dbo.DataEngineerSalaries WHERE work_year = @year";
+                    command.Parameters.AddWithValue("@year", year);
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            return MapToDataEngineerSalary(reader);
+                        }
+                        return null;
                     }
                 }
             }

@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SalaryService } from 'src/app/core/services/salary.service';
 import { DataEngineerSalary } from 'src/app/core/interfaces/engineer-salary/engineer-salary';

@@ -7,6 +7,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from "src/environments/environment.development";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
+import { LoadingInterceptor } from "./core/interceptors/loading.interceptor";
 
 
 export function getBaseUrl() {
@@ -22,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(BrowserModule),
     provideRouter(routes),
     provideHttpClient(withInterceptors([
-     AuthInterceptor
+     AuthInterceptor, LoadingInterceptor
     ])),
     { provide: APP_ID, useValue: 'ng-cli-universal' },
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },

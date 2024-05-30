@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SecurityService } from '../services/security/security.service';
 import { AppUserAuth } from '../interfaces/security/app-user-auth';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',

@@ -2,6 +2,16 @@
     <h1 class="title">Engineer Salary Data</h1>
     <div class="flexbox">
         <div class="card">
+            <h2>Find Salaries by Job Title</h2>
+            <label for="jobTitle">Job Title:</label>
+            <select id="jobTitle" [(ngModel)]="selectedTitle" (change)="onTitleChange()">
+              @for (title of jobTitles; track title) {
+              <option [value]="title">{{ title }}</option>
+              }
+            </select>
+
+        </div>
+        <div class="card">
             <h2>Top Paid Data Engineer Salaries</h2>
             <table>
                 <thead>
@@ -24,20 +34,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="card">
-            <h2>Find Salaries by Job Title</h2>
-            <label for="jobTitle">Job Title:</label>
-            <select id="jobTitle" [(ngModel)]="selectedTitle" (change)="onTitleChange()">
-              @for (title of jobTitles; track title) {
-              <option [value]="title">{{ title }}</option>
-              }
-            </select>
-
-        </div>
+     
         <div class="card">
             <ul>
                 <li><a routerLink="data/">View More Salary Data</a></li>
             </ul>
         </div>
     </div>
+    
 </div>
