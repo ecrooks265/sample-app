@@ -8,6 +8,7 @@ import { environment } from "src/environments/environment.development";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
 import { LoadingInterceptor } from "./core/interceptors/loading.interceptor";
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 
 export function getBaseUrl() {
@@ -30,6 +31,6 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
-    }), provideAnimationsAsync(), provideAnimationsAsync()
+    }), provideAnimationsAsync(), provideAnimationsAsync(), provideCharts(withDefaultRegisterables())
   ]
 };
