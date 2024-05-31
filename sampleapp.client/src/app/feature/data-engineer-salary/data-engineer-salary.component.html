@@ -1,92 +1,101 @@
 <button class="mat-drawer-btn sec-page-btn" (click)="drawer.toggle()">
   <mat-icon>settings</mat-icon>
 </button>
-<mat-drawer-container [hasBackdrop]="true" (backdropClick)="drawer.close()"id="ctn">
+<mat-drawer-container [hasBackdrop]="true" (backdropClick)="drawer.close()" id="ctn">
   <h1 class="title">Engineer Salary Data</h1>
   <mat-drawer #drawer mode="over">
-      <h2>Manage Salaries</h2>
-      <ul>
-        <li><a routerLink="/data/add-data-engineer-salary">Add a Salary</a></li>
-        <li><a (click)="toggleSecondColumn()">Add/Remove Second Column</a></li>
-      </ul>
+    <h2>Manage Salaries</h2>
+    <ul>
+      <li><a routerLink="/data/add-data-engineer-salary">Add a Salary</a></li>
+      <li><a (click)="toggleSecondColumn()">Add/Remove Second Column</a></li>
+    </ul>
   </mat-drawer>
   <mat-drawer-content class="flexbox">
-    <!-- Find Salaries by Job Title -->
     <div class="card">
       <h2>Find Salaries by Job Title</h2>
-      <div class="">
+      <div>
         <label for="jobTitle">Job Title:</label>
         <select id="jobTitle" [(ngModel)]="selectedTitle" (change)="onTitleChange()">
-          @for (title of jobTitles; track title) {
+          @for(title of jobTitles; track title) {
             <option [value]="title">{{ title }}</option>
           }
         </select>
+        <button class="blue-btn" (click)="toggleChart1()">Toggle Chart/Table</button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Job</th>
-            <th>Exp</th>
-            <th>Salary</th>
-            <th>Com Location</th>
-            <th>Size</th>
-            <th>Remote</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for( salary of salariesByTitle; track salary.salary_in_usd){
+      @if(!showChart1) {
+        <table>
+          <thead>
             <tr>
+              <th>Job</th>
+              <th>Exp</th>
+              <th>Salary</th>
+              <th>Com Location</th>
+              <th>Size</th>
+              <th>Remote</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(salary of salariesByTitle; track salary) {
+              <tr>
                 <td>{{ salary.job_title }}</td>
-                <td>{{ salary.experience_level}}</td>
+                <td>{{ salary.experience_level }}</td>
                 <td>{{ salary.salary_in_usd }}</td>
                 <td>{{ salary.company_location }}</td>
                 <td>{{ salary.company_size }}</td>
                 <td>{{ salary.remote_ratio }}</td>
-                
-            </tr>
+              </tr>
             }
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      }
+      @if(showChart1) {
+        <app-chart  (filterChange)="onFilterChange($event)" [labels]="chartLabels" [data]="chartData"></app-chart>
+      }
     </div>
-    @if(showSecondColumn == true){
-    <hr>
-    <div class="card">
-      <h2>Find Salaries by Job Title</h2>
-      <div class="">
-        <label for="jobTitle">Job Title:</label>
-        <select id="jobTitle" [(ngModel)]="selectedTitle2" (change)="onTitleChange2()">
-          @for (title of jobTitles; track title) {
-            <option [value]="title">{{ title }}</option>
-          }
-        </select>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Job</th>
-            <th>Exp</th>
-            <th>Salary</th>
-            <th>Com Location</th>
-            <th>Size</th>
-            <th>Remote</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for( salary of salariesByTitle2; track salary.salary_in_usd){
-            <tr>
-                <td>{{ salary.job_title }}</td>
-                <td>{{ salary.experience_level}}</td>
-                <td>{{ salary.salary_in_usd }}</td>
-                <td>{{ salary.company_location }}</td>
-                <td>{{ salary.company_size }}</td>
-                <td>{{ salary.remote_ratio }}</td>
-                
-            </tr>
-            }
-        </tbody>
-      </table>
-    </div>
-    }
 
-</mat-drawer-content>
+    @if(showSecondColumn) {
+      <hr>
+      <div class="card">
+        <h2>Find Salaries by Job Title</h2>
+        <div>
+          <label for="jobTitle2">Job Title:</label>
+          <select id="jobTitle2" [(ngModel)]="selectedTitle2" (change)="onTitleChange2()">
+            @for(title of jobTitles; track title) {
+              <option [value]="title">{{ title }}</option>
+            }
+          </select>
+          <button class="blue-btn" (click)="toggleChart2()">Toggle Chart/Table</button>
+        </div>
+        @if(!showChart2) {
+          <table>
+            <thead>
+              <tr>
+                <th>Job</th>
+                <th>Exp</th>
+                <th>Salary</th>
+                <th>Com Location</th>
+                <th>Size</th>
+                <th>Remote</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(salary of salariesByTitle2; track salary) {
+                <tr>
+                  <td>{{ salary.job_title }}</td>
+                  <td>{{ salary.experience_level }}</td>
+                  <td>{{ salary.salary_in_usd }}</td>
+                  <td>{{ salary.company_location }}</td>
+                  <td>{{ salary.company_size }}</td>
+                  <td>{{ salary.remote_ratio }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+        @if(showChart2) {
+          <app-chart  (filterChange)="onFilterChange2($event)" [labels]="chartLabels2" [data]="chartData2"></app-chart>
+        }
+      </div>
+    }
+  </mat-drawer-content>
 </mat-drawer-container>

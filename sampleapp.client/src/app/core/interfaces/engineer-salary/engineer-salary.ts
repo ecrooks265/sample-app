@@ -1,4 +1,5 @@
 export interface DataEngineerSalary {
+    [key: string]: any; // for filtering by a property -- see data-engineer-salary component
     id: number;
     work_year: number;
     experience_level: string;
@@ -11,5 +12,6 @@ export interface DataEngineerSalary {
     remote_ratio: string;
     company_location: string;
     company_size: string;
-  }
+
+}
   
