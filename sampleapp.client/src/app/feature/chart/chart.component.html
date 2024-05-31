@@ -1,0 +1,24 @@
+<label>Sort By:</label>
+<select [(ngModel)]="selectedFilter" (change)="onFilterChange()">
+    @for(filter of filterOptions; track filter){
+        <option value="{{filter}}">{{filter}}</option>
+    }
+</select>
+<canvas baseChart
+  [datasets]="chartData.datasets"
+  [labels]="chartData.labels"
+  [options]="{
+    responsive: true,
+    scales: {
+      x: {
+        title: { display: true, text: 'Job Title' },
+        beginAtZero: true
+      },
+      y: {
+        title: { display: true, text: 'Salary (USD)' },
+        beginAtZero: true
+      }
+    }
+  }"
+  [type]="'bar'">
+</canvas>

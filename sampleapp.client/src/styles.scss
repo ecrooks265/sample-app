@@ -220,8 +220,31 @@ body { margin: 0; font-family:monospace; font-size: 12pt; font-weight: 700; }
 
 }
 
+
 a{
   text-decoration: none;
   color: var(--link-blue);
   cursor: pointer;
+}
+
+select{
+  margin-left: 2px;
+  padding: 10px;
+
+}
+
+button:hover{
+  text-decoration:underline;
+  transform: scale(1.05);
+
+}
+
+.blue-btn{
+  transition: 0.2s ease-in-out;
+  color: white;
+  border-radius: 5px;
+  border: transparent;
+  background-color: var(--link-blue);
+  padding: 10px;
+  margin: 5px;
 }
